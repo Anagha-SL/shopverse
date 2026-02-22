@@ -1,0 +1,21 @@
+@import "tailwindcss";
+body {
+    background-color: #F9FAFB;
+    margin: 0;
+    color: #1E293B;
+    user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
