@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalQuantity = useSelector((state) => state.cart.items.length);
   return (
     <>
       <div className="flex justify-between h-20 shadow-sm p-2.5 items-center sticky top-0 bg-white z-20">
