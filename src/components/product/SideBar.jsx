@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCategory } from "../../features/products/productsSlice";
 
-const Sidebar = ({ categories }) => {
+const Sidebar = ({ categories, onCategorySelect }) => {
   const dispatch = useDispatch();
   const selectedCategory = useSelector(
     (state) => state.products.selectedCategory,
@@ -9,6 +9,9 @@ const Sidebar = ({ categories }) => {
 
   const handleSelect = (category) => {
     dispatch(setCategory(category));
+    if (onCategorySelect) {
+      onCategorySelect();
+    }
   };
 
   return (
@@ -20,21 +23,20 @@ const Sidebar = ({ categories }) => {
           onClick={() => handleSelect("all")}
           className={`cursor-pointer px-3 py-2 rounded-lg transition ${
             selectedCategory === "all"
-              ? "bg-teal-100 text-teal-600 font-medium"
+              ? "bg-[#4aa8c4]/20 font-medium text-[#1b8caf]"
               : "text-slate-600 hover:bg-gray-100"
           }`}
         >
           All
         </li>
 
-        {/* Dynamic Categories */}
         {categories?.map((cat) => (
           <li
             key={cat.slug}
             onClick={() => handleSelect(cat.slug)}
             className={`cursor-pointer px-3 py-2 rounded-lg capitalize transition ${
               selectedCategory === cat.slug
-                ? "bg-teal-100 text-teal-600 font-medium"
+                ? "bg-[#4aa8c4]/20 font-medium text-[#1b8caf]"
                 : "text-slate-600 hover:bg-gray-100"
             }`}
           >
