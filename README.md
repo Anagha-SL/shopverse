@@ -1,16 +1,75 @@
-# React + Vite
+# ShopVerse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ShopVerse is a fully responsive e-commerce web application built using **React.js**, **Redux Toolkit**, and **Tailwind CSS**.  
+It demonstrates modern frontend architecture, state management, API integration, and production-level UI patterns.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+### Product Listing
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Fetches products dynamically from API
+- Category-based filtering (Desktop sidebar + Mobile drawer)
+- Responsive product grid
+- Loading and error state handling
 
-## Expanding the ESLint configuration
+### Product Details Page
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Dynamic routing (`/product/:id`)
+- Image gallery with thumbnail switching
+- Description, rating, and reviews
+- Shipping, warranty & return policy display
+- Quantity selector with +/- controls
+- Add to cart functionality
+
+### Cart Functionality
+
+- Add items with selected quantity
+- Increase / decrease quantity
+- Remove items
+- Unique item badge count in header
+- Order summary with total calculation
+- Toast notification on add-to-cart
+- Clear cart functionality
+
+### Mobile Experience
+
+- Slide-in category drawer
+- Auto-close filter on selection
+- Fully responsive layout
+- Sticky header and desktop sidebar
+
+---
+
+## Tech Stack
+
+- **React.js** (Component-based architecture)
+- **Redux Toolkit** (State management)
+- **React Router** (Dynamic routing)
+- **Tailwind CSS** (Utility-first styling)
+- **Axios** (API calls)
+- **React Hot Toast** (Notifications)
+- **DummyJSON API** (Product data)
+
+---
+
+## Improvements Planned
+
+- Cart persistence
+- Search functionality
+- More filtering and sorting options
+- Similar products section
+
+---
+
+## Acknowledgements
+
+- API by [DummyJSON Products](https://dummyjson.com/products)
+
+---
+
+## Author
+
+Anagha SL
+GitHub: https://github.com/Anagha-SL
