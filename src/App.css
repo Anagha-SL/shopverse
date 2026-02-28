@@ -1,4 +1,7 @@
 @import "tailwindcss";
+:root {
+  color-scheme: light;
+}
 body {
     background-color: #F9FAFB;
     margin: 0;

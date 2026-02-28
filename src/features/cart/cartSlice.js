@@ -12,12 +12,24 @@ const calculateTotals = (items) => {
   return { totalQuantity, totalPrice };
 };
 
+const loadCartFromStorage = () => {
+  try {
+    const data = localStorage.getItem("cart");
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    return [];
+  }
+};
+
+const savedItems = loadCartFromStorage();
+const { totalQuantity, totalPrice } = calculateTotals(savedItems);
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    items: [],
-    totalQuantity: 0,
-    totalPrice: 0,
+    items: loadCartFromStorage(),
+    totalQuantity: totalQuantity,
+    totalPrice: totalPrice,
   },
 
   reducers: {

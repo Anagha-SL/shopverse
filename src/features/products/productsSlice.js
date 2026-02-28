@@ -41,6 +41,7 @@ const productsSlice = createSlice({
     categoryStatus: "idle",
     productStatus: "idle",
     error: null,
+    sortOption: "default",
   },
   reducers: {
     setCategory: (state, action) => {
@@ -53,6 +54,9 @@ const productsSlice = createSlice({
           (item) => item.category === action.payload,
         );
       }
+    },
+    setSortOption: (state, action) => {
+      state.sortOption = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -95,4 +99,4 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
-export const { setCategory } = productsSlice.actions;
+export const { setCategory, setSortOption } = productsSlice.actions;
