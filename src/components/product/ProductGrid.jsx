@@ -3,7 +3,9 @@ import ProductCard from "./ProductCard";
 const ProductGrid = ({ products }) => {
   if (!products || products.length === 0) {
     return (
-      <div className="text-center py-10 text-slate-500">No products found.</div>
+      <div className="flex justify-center text-slate-600 mt-2.5 p-2.5 text-2xl min-h-[calc(100vh-5.5rem)]">
+        No products found.
+      </div>
     );
   }
   return (

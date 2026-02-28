@@ -10,18 +10,22 @@ import Loader from "../components/ui/Loader";
 import ErrorMessage from "../components/ui/ErrorMessage";
 import Sidebar from "../components/product/SideBar";
 import MobileCategoryDrawer from "../components/product/MobileDrawer";
+import ProductGridSkeleton from "../components/product/ProductGridSkeleton";
+import SidebarSkeleton from "../components/product/SideBarSkeleton";
 
 const Home = () => {
   const location = useLocation();
-
   const dispatch = useDispatch();
+
   const {
-    filteredItems,
+    items,
     itemsStatus,
     categoryStatus,
     error,
     categories,
     sortOption,
+    searchTerm,
+    selectedCategory,
   } = useSelector((state) => state.products);
   // console.log(filteredItems, status, categories);
 
@@ -35,12 +39,25 @@ const Home = () => {
   }, [dispatch, itemsStatus, categoryStatus]);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   useEffect(() => {
     setIsDrawerOpen(false);
   }, [location]);
 
-  const sortedProducts = useMemo(() => {
-    const products = [...filteredItems];
+  const finalProducts = useMemo(() => {
+    let products = [...items];
+
+    if (selectedCategory !== "all") {
+      products = products.filter(
+        (product) => product.category === selectedCategory,
+      );
+    }
+
+    if (searchTerm.trim() !== "") {
+      products = products.filter((product) =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+    }
 
     switch (sortOption) {
       case "priceLow":
@@ -58,13 +75,23 @@ const Home = () => {
       default:
         return products;
     }
-  }, [filteredItems, sortOption]);
+  }, [items, selectedCategory, sortOption, searchTerm]);
 
   if (itemsStatus === "loading" || categoryStatus === "loading") {
-    return <Loader />;
+    return (
+      <div className="flex gap-6 mx-2.5 min-h-[calc(100vh-5.5rem)]">
+        <aside className="w-1/4 hidden md:block sticky top-22 self-start">
+          <SidebarSkeleton />
+        </aside>
+
+        <div className="flex-1 mt-2.5">
+          <ProductGridSkeleton />
+        </div>
+      </div>
+    );
   }
 
-  if (itemsStatus === "failed" || itemsStatus === "failed") {
+  if (itemsStatus === "failed" || categoryStatus === "failed") {
     return <ErrorMessage message={error} />;
   }
 
@@ -78,14 +105,14 @@ const Home = () => {
           Filter
         </button>
       </div>
-      <div className="flex gap-6 mx-2.5">
+      <div className="flex gap-6 mx-2.5 min-h-[calc(100vh-5.5rem)]">
         {/* <aside className="w-1/4 hidden md:block sticky top-22 self-start max-h-[calc(100vh-5rem)] overflow-auto"> */}
         <aside className="w-1/4 hidden md:block sticky top-22 self-start">
           <Sidebar categories={categories} />
         </aside>
 
         <div className="flex-1">
-          <ProductGrid products={sortedProducts} />
+          <ProductGrid products={finalProducts} />
         </div>
       </div>
 

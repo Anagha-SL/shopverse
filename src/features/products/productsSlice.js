@@ -33,7 +33,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     items: [],
-    filteredItems: [],
+    // filteredItems: [],
     categories: [],
     selectedCategory: "all",
     selectedProduct: null,
@@ -42,21 +42,26 @@ const productsSlice = createSlice({
     productStatus: "idle",
     error: null,
     sortOption: "default",
+    searchTerm: "",
   },
   reducers: {
     setCategory: (state, action) => {
       state.selectedCategory = action.payload;
 
       if (action.payload === "all") {
-        state.filteredItems = state.items;
+        // state.filteredItems = state.items;
       } else {
-        state.filteredItems = state.items.filter(
-          (item) => item.category === action.payload,
-        );
+        // state.filteredItems = state.items.filter(
+        //   (item) => item.category === action.payload,
+        // );
       }
     },
     setSortOption: (state, action) => {
       state.sortOption = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      // console.log("setSearchTerm fired:", action.payload);
+      state.searchTerm = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,9 +70,10 @@ const productsSlice = createSlice({
         state.itemsStatus = "loading";
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
+        // console.log("fetchProducts fulfilled");
         state.itemsStatus = "succeeded";
         state.items = action.payload;
-        state.filteredItems = action.payload;
+        // state.filteredItems = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.itemsStatus = "failed";
@@ -99,4 +105,5 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
-export const { setCategory, setSortOption } = productsSlice.actions;
+export const { setCategory, setSortOption, setSearchTerm } =
+  productsSlice.actions;
